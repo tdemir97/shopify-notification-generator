@@ -11,6 +11,13 @@ const theme = extendTheme({
     initialColorMode: 'dark',
     useSystemColorMode: false,
   },
+  styles: {
+    global: {
+      body: {
+        bg: 'linear-gradient(to bottom right, #1a1c2b, #2d1b43)',
+      },
+    },
+  },
 })
 
 function App() {
@@ -19,22 +26,22 @@ function App() {
     orderNumber: '',
     storeName: '',
     amount: '',
-    currency: 'USD',
+    currency: 'TRY',
     quantity: '1',
     source: ''
   })
 
   return (
     <ChakraProvider theme={theme}>
-      <Box minH="100vh" bg="gray.900">
-        <Container maxW="container.xl" py={5}>
-          <Flex justify="space-between" mb={4}>
-            <Box as="h1" fontSize="2xl" fontWeight="bold" color="white">
+      <Box minH="100vh" bgGradient="linear(to-br, #1a1c2b, #2d1b43)">
+        <Container maxW="container.xl" py={8}>
+          <Flex justify="space-between" mb={8} align="center">
+            <Box as="h1" fontSize="3xl" fontWeight="bold" color="white">
               {t('title')}
             </Box>
             <LanguageSwitcher />
           </Flex>
-          <Flex gap={6} flexDirection={{ base: 'column', md: 'row' }}>
+          <Flex gap={8} flexDirection={{ base: 'column', lg: 'row' }}>
             <Box flex={1}>
               <NotificationForm
                 notificationData={notificationData}

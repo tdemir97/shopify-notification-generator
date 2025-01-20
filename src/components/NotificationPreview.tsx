@@ -40,7 +40,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
   };
 
   return (
-    <VStack width="100%" maxWidth="400px" spacing={6}>
+    <VStack width="100%" maxWidth="400px" spacing={6} mx="auto">
       <Box
         id="notification-preview"
         bg="rgba(0, 0, 0, 0.85)"
@@ -48,6 +48,9 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
         px={4}
         borderRadius="2xl"
         width="100%"
+        position="relative"
+        backdropFilter="blur(10px)"
+        boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
       >
         <Flex alignItems="center" gap={3}>
           <Box
@@ -59,6 +62,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
             display="flex"
             alignItems="center"
             justifyContent="center"
+            flexShrink={0}
           >
             <Image
               src="/shopify-bag.png"
@@ -68,14 +72,14 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
               objectFit="contain"
             />
           </Box>
-          <Box flex="1" pr={16}>
-            <Text color="white" fontSize="15px" fontWeight="medium" mb={0.5}>
+          <Box flex={1} pr={16}>
+            <Text color="white" fontSize="15px" fontWeight="medium" mb={0.5} lineHeight="1.2">
               {t('order')} #{orderNumber}
             </Text>
-            <Text color="white" fontSize="14px" mb={0.5}>
+            <Text color="white" fontSize="14px" mb={0.5} lineHeight="1.2">
               {currency} {amount}, {quantity} {t('item')}, {t('source')}: {source}
             </Text>
-            <Text color="white" fontSize="13px" opacity={0.7}>
+            <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2">
               {storeName}
             </Text>
           </Box>
@@ -95,6 +99,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
         onClick={handleDownload}
         colorScheme="green"
         width="100%"
+        size="lg"
         leftIcon={<DownloadIcon />}
       >
         {t('downloadImage')}
