@@ -91,10 +91,10 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
           </Box>
           <Box flex={1} pr={20}>
             <Text color="white" fontSize="15px" fontWeight="semibold" mb={1} lineHeight="1.2">
-              {t('order')} #{orderNumber}
+              Sipariş #{orderNumber}
             </Text>
             <Text color="white" fontSize="14px" mb={1} lineHeight="1.2">
-              {getCurrencySymbol(currency)}{amount}, {quantity} {t('item')}, {t('source')}: {source}
+              {getCurrencySymbol(currency)}{amount}, {quantity} item, Sipariş Kaynağı: {source}
             </Text>
             <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2">
               {storeName}
@@ -108,7 +108,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
             opacity={0.7}
             fontSize="13px"
           >
-            {t('timeAgo')}
+            1 sa. önce
           </Text>
         </Flex>
       </Box>

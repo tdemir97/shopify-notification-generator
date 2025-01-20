@@ -15,7 +15,7 @@ const theme = extendTheme({
     global: (props: { colorMode: string }) => ({
       body: {
         bg: props.colorMode === 'dark' 
-          ? 'linear-gradient(to bottom right, #1a1c2b, #2d1b43)'
+          ? 'linear-gradient(135deg, #0a0a0a, #2d1b43)'
           : 'linear-gradient(to bottom right, #f0f2f5, #ffffff)',
       },
     }),
