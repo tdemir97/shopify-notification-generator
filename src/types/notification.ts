@@ -18,20 +18,26 @@ export const CURRENCIES: CurrencyOption[] = [
 ];
 
 export interface NotificationData {
-  orderId: string;
-  amount: number;
-  quantity: number;
-  orderSource: string;
+  orderNumber: string;
   storeName: string;
-  currency: CurrencyOption;
+  amount: string;
+  currency: string;
+  quantity: string;
+  source: string;
 }
 
 export interface NotificationFormProps {
-  onSubmit: (data: NotificationData) => void;
+  notificationData: NotificationData;
+  setNotificationData: (data: NotificationData) => void;
 }
 
 export interface NotificationPreviewProps {
-  data: NotificationData;
+  orderNumber: string;
+  storeName: string;
+  amount: string;
+  currency: string;
+  quantity: string;
+  source: string;
 }
 
 export interface NotificationStyleProps {
