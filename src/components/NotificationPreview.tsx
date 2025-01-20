@@ -10,6 +10,7 @@ import {
 import { NotificationPreviewProps } from '../types/notification';
 import { useTranslation } from 'react-i18next';
 import html2canvas from 'html2canvas';
+import { CURRENCIES } from '../types/notification';
 
 const NotificationPreview: React.FC<NotificationPreviewProps> = ({
   orderNumber,
@@ -20,6 +21,11 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
   source
 }) => {
   const { t } = useTranslation();
+
+  const getCurrencySymbol = (currencyCode: string) => {
+    const currencyOption = CURRENCIES.find(c => c.value === currencyCode);
+    return currencyOption ? currencyOption.symbol : currencyCode;
+  };
 
   const handleDownload = async () => {
     const element = document.getElementById('notification-preview');
@@ -55,7 +61,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
         <Flex alignItems="center" gap={3}>
           <Box
             bg="white"
-            p={2}
+            p={1}
             borderRadius="lg"
             width="72px"
             height="72px"
@@ -63,12 +69,13 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
             alignItems="center"
             justifyContent="center"
             flexShrink={0}
+            overflow="hidden"
           >
             <Image
               src="/shopify-bag.png"
               alt="Shopify"
-              width="64px"
-              height="64px"
+              width="68px"
+              height="68px"
               objectFit="contain"
             />
           </Box>
@@ -77,7 +84,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
               {t('order')} #{orderNumber}
             </Text>
             <Text color="white" fontSize="14px" mb={0.5} lineHeight="1.2">
-              {currency} {amount}, {quantity} {t('item')}, {t('source')}: {source}
+              {getCurrencySymbol(currency)}{amount}, {quantity} {t('item')}, {t('source')}: {source}
             </Text>
             <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2">
               {storeName}

@@ -12,9 +12,18 @@ const theme = extendTheme({
     useSystemColorMode: false,
   },
   styles: {
-    global: {
+    global: (props: { colorMode: string }) => ({
       body: {
-        bg: 'linear-gradient(to bottom right, #1a1c2b, #2d1b43)',
+        bg: props.colorMode === 'dark' 
+          ? 'linear-gradient(to bottom right, #1a1c2b, #2d1b43)'
+          : 'linear-gradient(to bottom right, #f7fafc, #e2e8f0)',
+      },
+    }),
+  },
+  components: {
+    Button: {
+      defaultProps: {
+        colorScheme: 'blue',
       },
     },
   },
@@ -33,7 +42,7 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box minH="100vh" bgGradient="linear(to-br, #1a1c2b, #2d1b43)">
+      <Box minH="100vh" transition="background 0.2s ease">
         <Container maxW="container.xl" py={8}>
           <Flex justify="space-between" mb={8} align="center">
             <Box as="h1" fontSize="3xl" fontWeight="bold" color="white">
