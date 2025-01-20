@@ -1,52 +1,38 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-const resources = {
-  en: {
-    translation: {
-      order: 'Order',
-      item: 'item',
-      orderSource: 'order source',
-      generateNotification: 'Generate Notification',
-      downloadImage: 'Download Image',
-      error: 'Error',
-      fillRequiredFields: 'Please fill all required fields',
-      orderId: 'Order ID',
-      productName: 'Product Name',
-      storeName: 'Store Name',
-      amount: 'Amount',
-      quantity: 'Quantity',
-      currency: 'Currency',
+i18n.use(initReactI18next).init({
+  fallbackLng: 'tr',
+  resources: {
+    tr: {
+      translation: {
+        title: 'Shopify Sipariş Bildirim Oluşturucu',
+        orderNumber: 'Sipariş No',
+        storeName: 'Mağaza Adı',
+        amount: 'Tutar',
+        quantity: 'Adet',
+        source: 'Sipariş Kaynağı',
+        downloadImage: 'Görseli İndir',
+        currency: 'Para Birimi',
+        timeAgo: '1 sa. önce',
+        order: 'Sipariş'
+      }
     },
-  },
-  tr: {
-    translation: {
-      order: 'Sipariş',
-      item: 'ürün',
-      orderSource: 'sipariş kaynağı',
-      generateNotification: 'Bildirim Oluştur',
-      downloadImage: 'Görseli İndir',
-      error: 'Hata',
-      fillRequiredFields: 'Lütfen gerekli alanları doldurun',
-      orderId: 'Sipariş No',
-      productName: 'Ürün Adı',
-      storeName: 'Mağaza Adı',
-      amount: 'Tutar',
-      quantity: 'Adet',
-      currency: 'Para Birimi',
-    },
-  },
-};
-
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: 'tr',
-    fallbackLng: 'en',
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+    en: {
+      translation: {
+        title: 'Shopify Order Notification Generator',
+        orderNumber: 'Order Number',
+        storeName: 'Store Name',
+        amount: 'Amount',
+        quantity: 'Quantity',
+        source: 'Order Source',
+        downloadImage: 'Download Image',
+        currency: 'Currency',
+        timeAgo: '1 hour ago',
+        order: 'Order'
+      }
+    }
+  }
+});
 
 export default i18n; 

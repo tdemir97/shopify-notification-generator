@@ -11,6 +11,8 @@ import {
 import { toPng } from 'html-to-image';
 import { NotificationPreviewProps } from '../types/notification';
 import { useTranslation } from 'react-i18next';
+import html2canvas from 'html2canvas';
+import shopifyLogo from '../assets/shopify-bag.png';
 
 const NotificationPreview: React.FC<NotificationPreviewProps> = ({ data }) => {
   const { t, i18n } = useTranslation();
@@ -19,26 +21,21 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({ data }) => {
   const textColor = useColorModeValue('white', 'white');
 
   const handleDownload = async () => {
-    if (previewRef.current) {
-      try {
-        const dataUrl = await toPng(previewRef.current, {
-          cacheBust: true,
-          pixelRatio: 4,
-          backgroundColor: 'rgba(0, 0, 0, 0.85)',
-          style: {
-            transform: 'none'
-          },
-          quality: 1,
-        });
+    const element = document.getElementById('notification-preview');
+    if (!element) return;
 
-        const link = document.createElement('a');
-        link.download = `notification-${data.orderId}.png`;
-        link.href = dataUrl;
-        link.click();
-      } catch (err) {
-        console.error('Error generating image:', err);
-      }
-    }
+    const canvas = await html2canvas(element, {
+      backgroundColor: '#1A202C',
+      scale: 2,
+      logging: false,
+      useCORS: true,
+      allowTaint: true,
+    });
+
+    const link = document.createElement('a');
+    link.download = 'shopify-notification.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
   };
 
   const formatCurrency = (amount: number) => {
@@ -62,6 +59,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({ data }) => {
     >
       <Box
         ref={previewRef}
+        id="notification-preview"
         bg={bgColor}
         py={3.5}
         px={4}
@@ -74,22 +72,20 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({ data }) => {
         <Flex alignItems="center" gap={3}>
           <Box
             bg="white"
-            p={0.1}
+            p={2}
             borderRadius="lg"
-            width="80px"
-            height="80px"
+            width="72px"
+            height="72px"
             display="flex"
             alignItems="center"
             justifyContent="center"
-            overflow="hidden"
-            flexShrink={0}
           >
-            <Image 
-              src="/shopify-bag.png"
-              alt="Shopify Logo"
-              width="78px"
-              height="78px"
-              objectFit="cover"
+            <Image
+              src={shopifyLogo}
+              alt="Shopify"
+              width="64px"
+              height="64px"
+              objectFit="contain"
             />
           </Box>
           <Box flex="1" pr={16}>
