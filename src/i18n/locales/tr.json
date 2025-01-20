@@ -1,0 +1,12 @@
+{
+  "title": "Shopify Sipariş Bildirimi Oluşturucu",
+  "orderNumber": "Sipariş No",
+  "storeName": "Mağaza Adı",
+  "amount": "Tutar",
+  "currency": "Para Birimi",
+  "quantity": "Adet",
+  "orderSource": "Sipariş Kaynağı",
+  "downloadImage": "Görseli İndir",
+  "fillRequiredFields": "Lütfen gerekli alanları doldurun",
+  "error": "Hata"
+} 

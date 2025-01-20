@@ -1,0 +1,12 @@
+{
+  "title": "Shopify Order Notification Generator",
+  "orderNumber": "Order Number",
+  "storeName": "Store Name",
+  "amount": "Amount",
+  "currency": "Currency",
+  "quantity": "Quantity",
+  "orderSource": "Order Source",
+  "downloadImage": "Download Image",
+  "fillRequiredFields": "Please fill in the required fields",
+  "error": "Error"
+} 
