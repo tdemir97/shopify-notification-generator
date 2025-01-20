@@ -33,13 +33,12 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
     const element = document.getElementById('notification-preview');
     if (!element) return;
 
-    // Geçici olarak arka plan rengini siyah yapalım
     const originalBg = element.style.background;
     element.style.background = 'rgba(0, 0, 0, 0.85)';
 
     const canvas = await html2canvas(element, {
       backgroundColor: null,
-      scale: 2,
+      scale: 3,
       logging: false,
       useCORS: true,
       allowTaint: true,
@@ -51,7 +50,6 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
       }
     });
 
-    // Arka plan rengini geri alalım
     element.style.background = originalBg;
 
     const link = document.createElement('a');
@@ -64,52 +62,49 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
     <VStack width="100%" maxWidth="400px" spacing={6} mx="auto">
       <Box
         id="notification-preview"
-        bg={colorMode === 'dark' ? 'rgba(0, 0, 0, 0.85)' : 'white'}
-        py={3.5}
+        bg="rgba(0, 0, 0, 0.85)"
+        py={4}
         px={4}
         borderRadius="2xl"
         width="100%"
         position="relative"
-        backdropFilter="blur(10px)"
-        boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
       >
-        <Flex alignItems="center" gap={3}>
+        <Flex alignItems="center" gap={4}>
           <Box
             bg="white"
-            p={0.5}
-            borderRadius="lg"
-            width="72px"
-            height="72px"
+            p={2}
+            borderRadius="xl"
+            width="84px"
+            height="84px"
             display="flex"
             alignItems="center"
             justifyContent="center"
             flexShrink={0}
-            overflow="hidden"
           >
             <Image
               src="/shopify-bag.png"
               alt="Shopify"
-              width="70px"
-              height="70px"
+              width="76px"
+              height="76px"
               objectFit="contain"
             />
           </Box>
-          <Box flex={1} pr={16}>
-            <Text color={colorMode === 'dark' ? 'white' : 'gray.800'} fontSize="15px" fontWeight="medium" mb={0.5} lineHeight="1.2">
+          <Box flex={1} pr={20}>
+            <Text color="white" fontSize="15px" fontWeight="semibold" mb={1} lineHeight="1.2">
               {t('order')} #{orderNumber}
             </Text>
-            <Text color={colorMode === 'dark' ? 'white' : 'gray.800'} fontSize="14px" mb={0.5} lineHeight="1.2">
+            <Text color="white" fontSize="14px" mb={1} lineHeight="1.2">
               {getCurrencySymbol(currency)}{amount}, {quantity} {t('item')}, {t('source')}: {source}
             </Text>
-            <Text color={colorMode === 'dark' ? 'white' : 'gray.800'} fontSize="13px" opacity={0.7} lineHeight="1.2">
+            <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2">
               {storeName}
             </Text>
           </Box>
           <Text
             position="absolute"
-            top={3.5}
+            top={4}
             right={4}
-            color={colorMode === 'dark' ? 'white' : 'gray.800'}
+            color="white"
             opacity={0.7}
             fontSize="13px"
           >
