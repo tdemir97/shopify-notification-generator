@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, HStack, IconButton, useColorMode } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
