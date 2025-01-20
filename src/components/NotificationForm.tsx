@@ -4,15 +4,23 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Select,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  Select,
+  FormErrorMessage,
+  Box,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { NotificationFormProps, CURRENCIES } from '../types/notification';
+import { NotificationData } from '../types/notification';
+import { CURRENCIES } from '../types/notification';
+
+interface NotificationFormProps {
+  notificationData: NotificationData;
+  setNotificationData: (data: NotificationData) => void;
+}
 
 const NotificationForm: React.FC<NotificationFormProps> = ({
   notificationData,
@@ -20,137 +28,152 @@ const NotificationForm: React.FC<NotificationFormProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleChange = (field: keyof typeof notificationData, value: string) => {
+  const handleChange = (
+    field: keyof NotificationData,
+    value: string | number
+  ) => {
     setNotificationData({
       ...notificationData,
-      [field]: value,
+      [field]: value.toString(),
     });
   };
 
   return (
-    <VStack spacing={6} align="stretch" bg="gray.800" p={8} borderRadius="xl">
+    <VStack spacing={6} align="stretch" width="100%">
       <FormControl isRequired>
-        <FormLabel color="gray.300" mb={2}>{t('orderNumber')}</FormLabel>
+        <FormLabel>{t('orderNumber')}</FormLabel>
         <Input
           value={notificationData.orderNumber}
           onChange={(e) => handleChange('orderNumber', e.target.value)}
           placeholder="#1234"
-          bg="gray.900"
-          color="white"
-          border="1px solid"
-          borderColor="gray.700"
-          _hover={{ borderColor: 'gray.600' }}
-          _focus={{ borderColor: 'blue.400', boxShadow: 'none' }}
-          height="45px"
-          fontSize="md"
+          bg="rgba(30, 41, 59, 0.5)"
+          border="1px solid rgba(255, 255, 255, 0.1)"
+          borderRadius="lg"
+          height="48px"
+          _hover={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+          }}
+          _focus={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+            borderColor: 'blue.400',
+          }}
         />
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel color="gray.300" mb={2}>{t('storeName')}</FormLabel>
+        <FormLabel>{t('storeName')}</FormLabel>
         <Input
           value={notificationData.storeName}
           onChange={(e) => handleChange('storeName', e.target.value)}
-          placeholder={t('storeName')}
-          bg="gray.900"
-          color="white"
-          border="1px solid"
-          borderColor="gray.700"
-          _hover={{ borderColor: 'gray.600' }}
-          _focus={{ borderColor: 'blue.400', boxShadow: 'none' }}
-          height="45px"
-          fontSize="md"
+          bg="rgba(30, 41, 59, 0.5)"
+          border="1px solid rgba(255, 255, 255, 0.1)"
+          borderRadius="lg"
+          height="48px"
+          _hover={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+          }}
+          _focus={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+            borderColor: 'blue.400',
+          }}
         />
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel color="gray.300" mb={2}>{t('amount')}</FormLabel>
+        <FormLabel>{t('amount')}</FormLabel>
         <NumberInput
           value={notificationData.amount}
           onChange={(value) => handleChange('amount', value)}
           min={0}
-          bg="gray.900"
-          borderColor="gray.700"
-          height="45px"
         >
           <NumberInputField
-            color="white"
-            border="1px solid"
-            borderColor="gray.700"
-            _hover={{ borderColor: 'gray.600' }}
-            _focus={{ borderColor: 'blue.400', boxShadow: 'none' }}
-            height="45px"
-            fontSize="md"
+            bg="rgba(30, 41, 59, 0.5)"
+            border="1px solid rgba(255, 255, 255, 0.1)"
+            borderRadius="lg"
+            height="48px"
+            _hover={{
+              bg: 'rgba(30, 41, 59, 0.7)',
+            }}
+            _focus={{
+              bg: 'rgba(30, 41, 59, 0.7)',
+              borderColor: 'blue.400',
+            }}
           />
           <NumberInputStepper>
-            <NumberIncrementStepper borderColor="gray.700" color="gray.400" />
-            <NumberDecrementStepper borderColor="gray.700" color="gray.400" />
+            <NumberIncrementStepper borderColor="rgba(255, 255, 255, 0.1)" />
+            <NumberDecrementStepper borderColor="rgba(255, 255, 255, 0.1)" />
           </NumberInputStepper>
         </NumberInput>
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel color="gray.300" mb={2}>{t('currency')}</FormLabel>
+        <FormLabel>{t('currency')}</FormLabel>
         <Select
           value={notificationData.currency}
           onChange={(e) => handleChange('currency', e.target.value)}
-          bg="gray.900"
-          color="white"
-          border="1px solid"
-          borderColor="gray.700"
-          _hover={{ borderColor: 'gray.600' }}
-          _focus={{ borderColor: 'blue.400', boxShadow: 'none' }}
-          height="45px"
-          fontSize="md"
+          bg="rgba(30, 41, 59, 0.5)"
+          border="1px solid rgba(255, 255, 255, 0.1)"
+          borderRadius="lg"
+          height="48px"
+          _hover={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+          }}
+          _focus={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+            borderColor: 'blue.400',
+          }}
         >
           {CURRENCIES.map((currency) => (
             <option key={currency.value} value={currency.value}>
-              {currency.label} ({currency.symbol})
+              {currency.label}
             </option>
           ))}
         </Select>
       </FormControl>
 
       <FormControl>
-        <FormLabel color="gray.300" mb={2}>{t('quantity')}</FormLabel>
+        <FormLabel>{t('quantity')}</FormLabel>
         <NumberInput
           value={notificationData.quantity}
           onChange={(value) => handleChange('quantity', value)}
           min={1}
-          bg="gray.900"
-          borderColor="gray.700"
-          height="45px"
         >
           <NumberInputField
-            color="white"
-            border="1px solid"
-            borderColor="gray.700"
-            _hover={{ borderColor: 'gray.600' }}
-            _focus={{ borderColor: 'blue.400', boxShadow: 'none' }}
-            height="45px"
-            fontSize="md"
+            bg="rgba(30, 41, 59, 0.5)"
+            border="1px solid rgba(255, 255, 255, 0.1)"
+            borderRadius="lg"
+            height="48px"
+            _hover={{
+              bg: 'rgba(30, 41, 59, 0.7)',
+            }}
+            _focus={{
+              bg: 'rgba(30, 41, 59, 0.7)',
+              borderColor: 'blue.400',
+            }}
           />
           <NumberInputStepper>
-            <NumberIncrementStepper borderColor="gray.700" color="gray.400" />
-            <NumberDecrementStepper borderColor="gray.700" color="gray.400" />
+            <NumberIncrementStepper borderColor="rgba(255, 255, 255, 0.1)" />
+            <NumberDecrementStepper borderColor="rgba(255, 255, 255, 0.1)" />
           </NumberInputStepper>
         </NumberInput>
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel color="gray.300" mb={2}>{t('source')}</FormLabel>
+        <FormLabel>{t('source')}</FormLabel>
         <Input
           value={notificationData.source}
           onChange={(e) => handleChange('source', e.target.value)}
-          placeholder="Online Store"
-          bg="gray.900"
-          color="white"
-          border="1px solid"
-          borderColor="gray.700"
-          _hover={{ borderColor: 'gray.600' }}
-          _focus={{ borderColor: 'blue.400', boxShadow: 'none' }}
-          height="45px"
-          fontSize="md"
+          bg="rgba(30, 41, 59, 0.5)"
+          border="1px solid rgba(255, 255, 255, 0.1)"
+          borderRadius="lg"
+          height="48px"
+          _hover={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+          }}
+          _focus={{
+            bg: 'rgba(30, 41, 59, 0.7)',
+            borderColor: 'blue.400',
+          }}
         />
       </FormControl>
     </VStack>

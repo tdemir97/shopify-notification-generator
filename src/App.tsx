@@ -15,7 +15,7 @@ const theme = extendTheme({
     global: (props: { colorMode: string }) => ({
       body: {
         bg: props.colorMode === 'dark' 
-          ? 'linear-gradient(135deg, #0a0a0a, #2d1b43)'
+          ? 'linear-gradient(135deg, #0f172a, #1e1b4b)'
           : 'linear-gradient(to bottom right, #f0f2f5, #ffffff)',
       },
     }),
@@ -23,7 +23,16 @@ const theme = extendTheme({
   components: {
     Button: {
       defaultProps: {
-        colorScheme: 'blue',
+        colorScheme: 'green',
+      },
+      variants: {
+        solid: {
+          bg: '#10b981',
+          color: 'white',
+          _hover: {
+            bg: '#059669',
+          },
+        },
       },
     },
     Box: {
@@ -34,20 +43,24 @@ const theme = extendTheme({
     FormLabel: {
       baseStyle: (props: { colorMode: string }) => ({
         color: props.colorMode === 'dark' ? 'gray.300' : 'gray.600',
+        marginBottom: '2',
+        fontSize: 'sm',
       }),
     },
     Input: {
       variants: {
         filled: (props: { colorMode: string }) => ({
           field: {
-            bg: props.colorMode === 'dark' ? 'gray.900' : 'white',
-            borderColor: props.colorMode === 'dark' ? 'gray.700' : 'gray.200',
+            bg: 'rgba(30, 41, 59, 0.5)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: 'lg',
             color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+            height: '48px',
             _hover: {
-              bg: props.colorMode === 'dark' ? 'gray.800' : 'gray.50',
+              bg: 'rgba(30, 41, 59, 0.7)',
             },
             _focus: {
-              bg: props.colorMode === 'dark' ? 'gray.800' : 'white',
+              bg: 'rgba(30, 41, 59, 0.7)',
               borderColor: 'blue.400',
             },
           },
