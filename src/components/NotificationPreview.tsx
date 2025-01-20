@@ -10,15 +10,11 @@ import {
 import { NotificationPreviewProps } from '../types/notification';
 import { useTranslation } from 'react-i18next';
 import html2canvas from 'html2canvas';
-import { CURRENCIES } from '../types/notification';
 
 const NotificationPreview: React.FC<NotificationPreviewProps> = ({
-  orderNumber,
   storeName,
   amount,
-  currency,
   quantity,
-  source
 }) => {
   const { t } = useTranslation();
 
