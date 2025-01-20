@@ -12,9 +12,11 @@ import { useTranslation } from 'react-i18next';
 import html2canvas from 'html2canvas';
 
 const NotificationPreview: React.FC<NotificationPreviewProps> = ({
+  orderNumber,
   storeName,
   amount,
   quantity,
+  source
 }) => {
   const { t } = useTranslation();
 
@@ -89,10 +91,10 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
           </Box>
           <Box flex={1} pr={20}>
             <Text color="white" fontSize="15px" fontWeight="normal" mb={1} lineHeight="1.2" fontFamily="Helvetica, sans-serif">
-              Sipariş DP59253
+              Sipariş {orderNumber}
             </Text>
             <Text color="white" fontSize="14px" mb={1} lineHeight="1.2" fontFamily="Helvetica, sans-serif">
-              ₺{formatPrice(amount)}, {quantity} ürün, sipariş kaynağı: Online Mağaza
+              ₺{formatPrice(amount)}, {quantity} ürün, sipariş kaynağı: {source}
             </Text>
             <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2" fontFamily="Helvetica, sans-serif">
               {storeName}

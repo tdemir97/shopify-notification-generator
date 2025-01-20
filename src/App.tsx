@@ -63,12 +63,12 @@ const theme = extendTheme({
 function App() {
   const { t } = useTranslation()
   const [notificationData, setNotificationData] = useState({
-    orderNumber: '1001',
-    storeName: 'Les Benjamins',
-    amount: '4600',
+    orderNumber: 'DP59253',
+    storeName: 'Dali Pups',
+    amount: '3489.90',
     currency: 'TRY',
     quantity: '1',
-    source: 'Online Store'
+    source: 'Online Mağaza'
   })
 
   return (
