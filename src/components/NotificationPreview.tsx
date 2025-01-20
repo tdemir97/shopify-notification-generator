@@ -19,7 +19,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
   quantity,
   source
 }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleDownload = async () => {
     const element = document.getElementById('notification-preview');

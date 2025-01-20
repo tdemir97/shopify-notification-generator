@@ -12,65 +12,72 @@ import {
   NumberDecrementStepper,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { NotificationData, CURRENCIES } from '../types/notification';
+import { NotificationFormProps, CURRENCIES } from '../types/notification';
 
-interface NotificationFormProps {
-  data: NotificationData;
-  onChange: (data: NotificationData) => void;
-}
-
-const NotificationForm: React.FC<NotificationFormProps> = ({ data, onChange }) => {
+const NotificationForm: React.FC<NotificationFormProps> = ({
+  notificationData,
+  setNotificationData,
+}) => {
   const { t } = useTranslation();
 
-  const handleChange = (field: keyof NotificationData, value: any) => {
-    onChange({ ...data, [field]: value });
+  const handleChange = (field: keyof typeof notificationData, value: string) => {
+    setNotificationData({
+      ...notificationData,
+      [field]: value,
+    });
   };
 
   return (
-    <VStack spacing={4} align="stretch">
+    <VStack spacing={4} align="stretch" bg="gray.800" p={6} borderRadius="xl">
       <FormControl isRequired>
-        <FormLabel>{t('orderNumber')}</FormLabel>
+        <FormLabel color="white">{t('orderNumber')}</FormLabel>
         <Input
-          value={data.orderId}
-          onChange={(e) => handleChange('orderId', e.target.value)}
-          placeholder="#1234"
+          value={notificationData.orderNumber}
+          onChange={(e) => handleChange('orderNumber', e.target.value)}
+          placeholder={t('orderNumber')}
+          bg="gray.700"
+          color="white"
+          borderColor="gray.600"
         />
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel>{t('storeName')}</FormLabel>
+        <FormLabel color="white">{t('storeName')}</FormLabel>
         <Input
-          value={data.storeName}
+          value={notificationData.storeName}
           onChange={(e) => handleChange('storeName', e.target.value)}
+          placeholder={t('storeName')}
+          bg="gray.700"
+          color="white"
+          borderColor="gray.600"
         />
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel>{t('amount')}</FormLabel>
+        <FormLabel color="white">{t('amount')}</FormLabel>
         <NumberInput
-          value={data.amount}
-          onChange={(_, value) => handleChange('amount', value)}
+          value={notificationData.amount}
+          onChange={(value) => handleChange('amount', value)}
           min={0}
-          precision={2}
+          bg="gray.700"
+          borderColor="gray.600"
         >
-          <NumberInputField />
+          <NumberInputField color="white" />
           <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
+            <NumberIncrementStepper borderColor="gray.600" color="white" />
+            <NumberDecrementStepper borderColor="gray.600" color="white" />
           </NumberInputStepper>
         </NumberInput>
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel>{t('currency')}</FormLabel>
+        <FormLabel color="white">{t('currency')}</FormLabel>
         <Select
-          value={data.currency.value}
-          onChange={(e) => {
-            const selectedCurrency = CURRENCIES.find(c => c.value === e.target.value);
-            if (selectedCurrency) {
-              handleChange('currency', selectedCurrency);
-            }
-          }}
+          value={notificationData.currency}
+          onChange={(e) => handleChange('currency', e.target.value)}
+          bg="gray.700"
+          color="white"
+          borderColor="gray.600"
         >
           {CURRENCIES.map((currency) => (
             <option key={currency.value} value={currency.value}>
@@ -81,27 +88,31 @@ const NotificationForm: React.FC<NotificationFormProps> = ({ data, onChange }) =
       </FormControl>
 
       <FormControl>
-        <FormLabel>{t('quantity')}</FormLabel>
+        <FormLabel color="white">{t('quantity')}</FormLabel>
         <NumberInput
-          value={data.quantity}
-          onChange={(_, value) => handleChange('quantity', value)}
+          value={notificationData.quantity}
+          onChange={(value) => handleChange('quantity', value)}
           min={1}
-          defaultValue={1}
+          bg="gray.700"
+          borderColor="gray.600"
         >
-          <NumberInputField />
+          <NumberInputField color="white" />
           <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
+            <NumberIncrementStepper borderColor="gray.600" color="white" />
+            <NumberDecrementStepper borderColor="gray.600" color="white" />
           </NumberInputStepper>
         </NumberInput>
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel>{t('orderSource')}</FormLabel>
+        <FormLabel color="white">{t('source')}</FormLabel>
         <Input
-          value={data.orderSource}
-          onChange={(e) => handleChange('orderSource', e.target.value)}
-          placeholder="Online Store"
+          value={notificationData.source}
+          onChange={(e) => handleChange('source', e.target.value)}
+          placeholder={t('source')}
+          bg="gray.700"
+          color="white"
+          borderColor="gray.600"
         />
       </FormControl>
     </VStack>
