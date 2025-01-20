@@ -22,9 +22,12 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const getCurrencySymbol = (currencyCode: string) => {
-    const currencyOption = CURRENCIES.find(c => c.value === currencyCode);
-    return currencyOption ? currencyOption.symbol : currencyCode;
+  const formatPrice = (price: string) => {
+    const num = parseFloat(price);
+    return new Intl.NumberFormat('tr-TR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(num);
   };
 
   const handleDownload = async () => {
@@ -85,16 +88,17 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
               width="76px"
               height="76px"
               objectFit="contain"
+              style={{ filter: 'brightness(0) saturate(100%) invert(82%) sepia(25%) saturate(1191%) hue-rotate(67deg) brightness(89%) contrast(87%)' }}
             />
           </Box>
           <Box flex={1} pr={20}>
-            <Text color="white" fontSize="15px" fontWeight="semibold" mb={1} lineHeight="1.2">
-              Sipariş #{orderNumber}
+            <Text color="white" fontSize="15px" fontWeight="normal" mb={1} lineHeight="1.2" fontFamily="Helvetica, sans-serif">
+              Sipariş DP59253
             </Text>
-            <Text color="white" fontSize="14px" mb={1} lineHeight="1.2">
-              {getCurrencySymbol(currency)}{amount}, {quantity} item, Sipariş Kaynağı: {source}
+            <Text color="white" fontSize="14px" mb={1} lineHeight="1.2" fontFamily="Helvetica, sans-serif">
+              ₺{formatPrice(amount)}, {quantity} ürün, sipariş kaynağı: Online Mağaza
             </Text>
-            <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2">
+            <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2" fontFamily="Helvetica, sans-serif">
               {storeName}
             </Text>
           </Box>
@@ -105,6 +109,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
             color="white"
             opacity={0.7}
             fontSize="13px"
+            fontFamily="Helvetica, sans-serif"
           >
             1 sa. önce
           </Text>
