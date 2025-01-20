@@ -5,13 +5,11 @@ import NotificationPreview from './components/NotificationPreview';
 import { useState } from 'react';
 import { NotificationData } from './types/notification';
 import LanguageSwitcher from './components/LanguageSwitcher';
-import { useTranslation } from 'react-i18next';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 const MotionBox = motion(Box);
 
 function App() {
-  const { t } = useTranslation();
   const { colorMode, toggleColorMode } = useColorMode();
   const [notificationData, setNotificationData] = useState<NotificationData>({
     orderId: '',
@@ -19,7 +17,7 @@ function App() {
     quantity: 1,
     orderSource: '',
     storeName: '',
-    currency: { value: 'TRY', symbol: '₺' }
+    currency: { value: 'TRY', label: 'Türk Lirası', symbol: '₺' }
   });
 
   const bgGradient = useColorModeValue(
