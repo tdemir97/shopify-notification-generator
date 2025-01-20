@@ -10,8 +10,6 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Select,
-  FormErrorMessage,
-  Box,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { NotificationData } from '../types/notification';
