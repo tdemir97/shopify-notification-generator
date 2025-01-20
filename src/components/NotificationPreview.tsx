@@ -6,6 +6,7 @@ import {
   Button,
   VStack,
   Image,
+  useColorMode,
 } from '@chakra-ui/react';
 import { NotificationPreviewProps } from '../types/notification';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +22,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
   source
 }) => {
   const { t } = useTranslation();
+  const { colorMode } = useColorMode();
 
   const getCurrencySymbol = (currencyCode: string) => {
     const currencyOption = CURRENCIES.find(c => c.value === currencyCode);
@@ -31,13 +33,26 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
     const element = document.getElementById('notification-preview');
     if (!element) return;
 
+    // Geçici olarak arka plan rengini siyah yapalım
+    const originalBg = element.style.background;
+    element.style.background = 'rgba(0, 0, 0, 0.85)';
+
     const canvas = await html2canvas(element, {
-      backgroundColor: '#1A202C',
+      backgroundColor: null,
       scale: 2,
       logging: false,
       useCORS: true,
       allowTaint: true,
+      onclone: (clonedDoc) => {
+        const clonedElement = clonedDoc.getElementById('notification-preview');
+        if (clonedElement) {
+          clonedElement.style.background = 'rgba(0, 0, 0, 0.85)';
+        }
+      }
     });
+
+    // Arka plan rengini geri alalım
+    element.style.background = originalBg;
 
     const link = document.createElement('a');
     link.download = 'shopify-notification.png';
@@ -49,7 +64,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
     <VStack width="100%" maxWidth="400px" spacing={6} mx="auto">
       <Box
         id="notification-preview"
-        bg="rgba(0, 0, 0, 0.85)"
+        bg={colorMode === 'dark' ? 'rgba(0, 0, 0, 0.85)' : 'white'}
         py={3.5}
         px={4}
         borderRadius="2xl"
@@ -61,7 +76,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
         <Flex alignItems="center" gap={3}>
           <Box
             bg="white"
-            p={1}
+            p={0.5}
             borderRadius="lg"
             width="72px"
             height="72px"
@@ -74,19 +89,19 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
             <Image
               src="/shopify-bag.png"
               alt="Shopify"
-              width="68px"
-              height="68px"
+              width="70px"
+              height="70px"
               objectFit="contain"
             />
           </Box>
           <Box flex={1} pr={16}>
-            <Text color="white" fontSize="15px" fontWeight="medium" mb={0.5} lineHeight="1.2">
+            <Text color={colorMode === 'dark' ? 'white' : 'gray.800'} fontSize="15px" fontWeight="medium" mb={0.5} lineHeight="1.2">
               {t('order')} #{orderNumber}
             </Text>
-            <Text color="white" fontSize="14px" mb={0.5} lineHeight="1.2">
+            <Text color={colorMode === 'dark' ? 'white' : 'gray.800'} fontSize="14px" mb={0.5} lineHeight="1.2">
               {getCurrencySymbol(currency)}{amount}, {quantity} {t('item')}, {t('source')}: {source}
             </Text>
-            <Text color="white" fontSize="13px" opacity={0.7} lineHeight="1.2">
+            <Text color={colorMode === 'dark' ? 'white' : 'gray.800'} fontSize="13px" opacity={0.7} lineHeight="1.2">
               {storeName}
             </Text>
           </Box>
@@ -94,7 +109,7 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
             position="absolute"
             top={3.5}
             right={4}
-            color="white"
+            color={colorMode === 'dark' ? 'white' : 'gray.800'}
             opacity={0.7}
             fontSize="13px"
           >

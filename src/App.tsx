@@ -16,7 +16,7 @@ const theme = extendTheme({
       body: {
         bg: props.colorMode === 'dark' 
           ? 'linear-gradient(to bottom right, #1a1c2b, #2d1b43)'
-          : 'linear-gradient(to bottom right, #f7fafc, #e2e8f0)',
+          : 'linear-gradient(to bottom right, #f0f2f5, #ffffff)',
       },
     }),
   },
@@ -26,18 +26,49 @@ const theme = extendTheme({
         colorScheme: 'blue',
       },
     },
+    Box: {
+      baseStyle: (props: { colorMode: string }) => ({
+        color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+      }),
+    },
+    FormLabel: {
+      baseStyle: (props: { colorMode: string }) => ({
+        color: props.colorMode === 'dark' ? 'gray.300' : 'gray.600',
+      }),
+    },
+    Input: {
+      variants: {
+        filled: (props: { colorMode: string }) => ({
+          field: {
+            bg: props.colorMode === 'dark' ? 'gray.900' : 'white',
+            borderColor: props.colorMode === 'dark' ? 'gray.700' : 'gray.200',
+            color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+            _hover: {
+              bg: props.colorMode === 'dark' ? 'gray.800' : 'gray.50',
+            },
+            _focus: {
+              bg: props.colorMode === 'dark' ? 'gray.800' : 'white',
+              borderColor: 'blue.400',
+            },
+          },
+        }),
+      },
+      defaultProps: {
+        variant: 'filled',
+      },
+    },
   },
 })
 
 function App() {
   const { t } = useTranslation()
   const [notificationData, setNotificationData] = useState({
-    orderNumber: '',
-    storeName: '',
-    amount: '',
+    orderNumber: '1001',
+    storeName: 'Les Benjamins',
+    amount: '4600',
     currency: 'TRY',
     quantity: '1',
-    source: ''
+    source: 'Online Store'
   })
 
   return (
@@ -45,7 +76,7 @@ function App() {
       <Box minH="100vh" transition="background 0.2s ease">
         <Container maxW="container.xl" py={8}>
           <Flex justify="space-between" mb={8} align="center">
-            <Box as="h1" fontSize="3xl" fontWeight="bold" color="white">
+            <Box as="h1" fontSize="3xl" fontWeight="bold">
               {t('title')}
             </Box>
             <LanguageSwitcher />
