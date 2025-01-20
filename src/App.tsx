@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import NotificationForm from './components/NotificationForm'
 import NotificationPreview from './components/NotificationPreview'
 import LanguageSwitcher from './components/LanguageSwitcher'
