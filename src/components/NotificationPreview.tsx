@@ -6,7 +6,6 @@ import {
   Button,
   VStack,
   Image,
-  useColorMode,
 } from '@chakra-ui/react';
 import { NotificationPreviewProps } from '../types/notification';
 import { useTranslation } from 'react-i18next';
@@ -22,7 +21,6 @@ const NotificationPreview: React.FC<NotificationPreviewProps> = ({
   source
 }) => {
   const { t } = useTranslation();
-  const { colorMode } = useColorMode();
 
   const getCurrencySymbol = (currencyCode: string) => {
     const currencyOption = CURRENCIES.find(c => c.value === currencyCode);
